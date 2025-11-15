@@ -12,7 +12,11 @@ const userSchema = mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    role:{
+        type:String,
+        default:"user"
     }
-})
+},{timestamps:true})
 
 export default mongoose.model("User",userSchema);
