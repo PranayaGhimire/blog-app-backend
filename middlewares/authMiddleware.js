@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-export const protect = async (req,res) => {
+export const protect = async (req,res,next) => {
     const token = req.headers.authorization[1];
     if(!token)
         res.status(401).json({message:"Token Missing"});
@@ -12,4 +12,10 @@ export const protect = async (req,res) => {
     } catch (error) {
         res.status(401).json({message:"Invalid Token"});
     }
+}
+
+export const adminOnly = (req,res,next) => {
+    if(req.user.role !== "admin")
+        return res.status(401).json({message:"Only admin is allowed"});
+    next();
 }
