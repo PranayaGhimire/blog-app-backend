@@ -2,7 +2,7 @@ import Post from "../models/Post.js"
 
 export const getPosts = async(req,res) => {
     const posts = await Post.find();
-    return res.status(201).json({
+     res.status(201).json({
         success:true,
         message:"All posts fetched successfully",
         data:posts
