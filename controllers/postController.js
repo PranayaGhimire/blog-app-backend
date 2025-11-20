@@ -1,51 +1,73 @@
 import Post from "../models/Post.js"
 
 export const getPosts = async(req,res) => {
-    const posts = await Post.find();
-     res.status(201).json({
-        success:true,
-        message:"All posts fetched successfully",
-        data:posts
-    });   
+    try {
+        const posts = await Post.find();
+        res.status(201).json({
+            success:true,
+            message:"All posts fetched successfully",
+            data:posts
+        });      
+    } catch (error) {
+        res.status(500).json({
+            message:error
+        })
+    }
 }
 
 export const getPost = async(req,res) => {
-    const post = await Post.findById(req.params.id);
-    if(!post)
-        return res.status(400).json({message:"Post not found"});
-    return res.status(201).json({
-        success:true,
-        message:"Post fetched successfully",
-        data:post
-    })    
+    try {
+        const post = await Post.findById(req.params.id);
+        if(!post)
+            return res.status(400).json({message:"Post not found"});
+        res.status(201).json({
+            success:true,
+            message:"Post fetched successfully",
+            data:post
+        })     
+    } catch (error) {
+        res.status(500).json({message:error})
+    }  
 }
 
 export const createPost = async(req,res) => {
-    const post = await Post.create(req.body);
-    return res.status(201).json({
-        success:true,
-        message:"New post created successfully",
-        data:post
-    })
+    try {
+        const post = await Post.create(req.body);
+        res.status(201).json({
+            success:true,
+            message:"New post created successfully",
+            data:post
+        })   
+    } catch (error) {
+        res.status(500).json({message:error})
+    }
 }
 
 export const updatePost = async(req,res) => {
-    const post = await Post.findByIdAndUpdate(req.params.id);
-    if(!post)
-        return res.status(400).json({message:"Post not found"});
-    return res.status(201).json({
-        success:true,
-        message:"Post updated successfully",
-        data:post
-    });
+    try {
+        const post = await Post.findByIdAndUpdate(req.params.id);
+        if(!post)
+            return res.status(400).json({message:"Post not found"});
+        res.status(201).json({
+            success:true,
+            message:"Post updated successfully",
+            data:post
+        });   
+    } catch (error) {
+        res.status(500).json({message:error})
+    }
 }
 
 export const deletePost = async(req,res) => {
-    const post = await Post.findByIdAndDelete(req.params.id);
-    if(!post)
-        return res.status(400).json({message:"Post not found"});
-    return res.status(201).json({
-        success:true,
-        message:"Post deleted successfully"
-    });
+    try {
+        const post = await Post.findByIdAndDelete(req.params.id);
+        if(!post)
+            return res.status(400).json({message:"Post not found"});
+        res.status(201).json({
+            success:true,
+            message:"Post deleted successfully"
+        });   
+    } catch (error) {
+        res.status(500).json({message:error})
+    }
 }
