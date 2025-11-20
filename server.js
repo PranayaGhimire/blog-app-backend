@@ -5,6 +5,13 @@ import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 const app = express();
 dotenv.config();
+app.get("/",(req,res) => res.send(`
+    <h2>API Working Fine</h2>
+    <h3>Endpoints</h3>
+    <h4>/api/auth/register</h4>
+    <h4>/api/auth/login</h4>
+    <h4>/api/posts</h4>
+    `))
 app.use("/api/auth",authRoutes);
 app.use("/api/posts",postRoutes);
 
