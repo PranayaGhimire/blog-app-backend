@@ -31,8 +31,14 @@ export const getPost = async(req,res) => {
 }
 
 export const createPost = async(req,res) => {
+    const {title,description} = req.body;
+    const userId = req.user._id;
     try {
-        const post = await Post.create(req.body);
+        const post = await Post.create({
+            title,
+            description,
+            user:userId
+        });
         res.status(201).json({
             success:true,
             message:"New post created successfully",

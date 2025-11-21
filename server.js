@@ -5,6 +5,7 @@ import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 const app = express();
 dotenv.config();
+app.use(express.json());
 app.get("/",(req,res) => res.send(`
     <h2>API Working Fine</h2>
     <h3>Endpoints</h3>
@@ -14,7 +15,6 @@ app.get("/",(req,res) => res.send(`
     `))
 app.use("/api/auth",authRoutes);
 app.use("/api/posts",postRoutes);
-
 app.listen(process.env.PORT,() => {
     console.log(`Server running on port ${process.env.PORT}`);
     mongoConnect();
