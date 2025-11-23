@@ -1,10 +1,12 @@
 import express from "express";
+import cors from "cors"
 import { mongoConnect } from "./config/db.js";
 import dotenv  from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 const app = express();
 dotenv.config();
+app.use(cors());
 app.use(express.json());
 app.get("/",(req,res) => res.send(`
     <h2>API Working Fine</h2>
